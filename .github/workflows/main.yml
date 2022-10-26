@@ -15,7 +15,7 @@ jobs:
       url: 'dev-stackovergame.com.br'
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 16
       - run: yarn  
@@ -28,7 +28,7 @@ jobs:
     needs: deploy-dev
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 16
       - run: yarn 
@@ -40,7 +40,7 @@ jobs:
     needs: deploy-hml
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 16
       - run: yarn
