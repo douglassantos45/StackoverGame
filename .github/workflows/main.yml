@@ -2,7 +2,7 @@
 name: CI Github Actions
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "hml" ]
   pull_request:
     types:
       - opened
