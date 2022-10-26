@@ -7,15 +7,18 @@ on:
     types:
       - opened
     branches: [ "dev" ]
-jobs:
-  build:
+jobs:    
+  deploy-dev:
     runs-on: ubuntu-latest
+    environment:
+      name: dev
+      url: 'dev-stackovergame.com.br'
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: yarn 
+      - run: yarn  
       
   deploy-hml:
     runs-on: ubuntu-latest
@@ -29,17 +32,16 @@ jobs:
         with:
           node-version: 16
       - run: yarn 
-      
-  deploy-dev:
+  
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: dev
-      url: 'dev-stackovergame.com.br'
-    needs: build
+    environment: 
+      name: prod
+    needs: deploy-hml
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - run: yarn 
+      - run: yarn
       
