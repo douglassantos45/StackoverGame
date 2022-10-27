@@ -1,5 +1,5 @@
 type ChallengeCardProps = {
-  backgroundImage: string;
+  image: string;
   title: string;
   description: string;
   xp: number;
@@ -8,21 +8,22 @@ type ChallengeCardProps = {
 };
 
 export const ChallengeCard = ({
-  backgroundImage,
+  image,
   title,
   description,
   xp,
   locked = false,
   completed = true,
 }: ChallengeCardProps) => {
-  backgroundImage = 'gpu.png';
+  const backgroundImage = `bg-[url('${image}')]`;
+
   return (
     <div
       className={`relative max-h-[103px] max-w-[100px] md:max-h-[133px] md:max-w-[130px] w-full h-full ${
         locked && 'grayscale'
       } ${
         completed && 'brightness-150'
-      } bg-[url('${backgroundImage}')] bg-cover bg-no-repeat cursor-pointer hover:brightness-150 transition`}
+      } ${backgroundImage} bg-cover bg-no-repeat cursor-pointer hover:brightness-150 transition`}
     >
       <div>
         {locked ? (
@@ -31,21 +32,25 @@ export const ChallengeCard = ({
             alt=""
             className="max-h-[103px] max-w-[100px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
           />
-        ) : (
+        ) : completed ? (
           <>
-            {completed && (
-              <img
-                src="crow-icon.svg"
-                alt=""
-                className="absolute -top-8 -right-6"
-              />
-            )}
+            <img
+              src="crow-icon.svg"
+              alt=""
+              className="absolute -top-8 -right-6"
+            />
             <img
               src={completed ? 'challenge-completed.svg' : backgroundImage}
               alt=""
               className="max-h-[133px] max-w-[130px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
             />
           </>
+        ) : (
+          <img
+            src={image}
+            alt=""
+            className="max-h-[103px] max-w-[100px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
+          />
         )}
         <p
           className={`text-center text-[11px] mt-4 ${
