@@ -15,7 +15,6 @@ export const ChallengeCard = ({
   locked = false,
   completed = true,
 }: ChallengeCardProps) => {
-  const backgroundImage = `bg-[url('${image}')]`;
 
   return (
     <div
@@ -23,7 +22,8 @@ export const ChallengeCard = ({
         locked && 'grayscale'
       } ${
         completed && 'brightness-150'
-      } ${backgroundImage} bg-cover bg-no-repeat cursor-pointer hover:brightness-150 transition`}
+      } bg-cover bg-no-repeat cursor-pointer hover:brightness-150 transition`}
+      style={{backgroundImage: `url('${image}')`}}
     >
       <div>
         {locked ? (
@@ -40,7 +40,7 @@ export const ChallengeCard = ({
               className="absolute -top-8 -right-6"
             />
             <img
-              src={completed ? 'challenge-completed.svg' : backgroundImage}
+              src='challenge-completed.svg'
               alt=""
               className="max-h-[133px] max-w-[130px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
             />
