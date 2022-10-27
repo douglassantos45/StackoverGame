@@ -18,7 +18,7 @@ export const Challenges = () => {
             completed={true}
             locked={false}
             xp={35}
-            backgroundImage="gpu.png"
+            image="gpu.png"
           />
           <ChallengeCard
             title=""
@@ -26,7 +26,7 @@ export const Challenges = () => {
             completed={false}
             locked={false}
             xp={35}
-            backgroundImage="gpu.png"
+            image="gpu.png"
           />
 
 <ChallengeCard
@@ -35,7 +35,7 @@ export const Challenges = () => {
             completed={false}
             locked={true}
             xp={35}
-            backgroundImage="gpu.png"
+            image="gpu.png"
           />
         </div>
       </Level>
