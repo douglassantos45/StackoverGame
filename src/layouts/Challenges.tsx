@@ -51,7 +51,7 @@ type LevelProps = {
 const Level = ({ level, children }: LevelProps) => {
   return (
     <section>
-      <div className="relative px-36 py-10">
+      <div className="relative md:px-36 py-10">
         <div className="bg-gray-400 h-[2px]" />
         <span className="absolute bg-background top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 px-6">
           Nivel {level}
