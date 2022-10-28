@@ -15,61 +15,66 @@ export const ChallengeCard = ({
   locked = false,
   completed = true,
 }: ChallengeCardProps) => {
-
   return (
-    <div
-      className={`relative max-h-[103px] max-w-[100px] md:max-h-[133px] md:max-w-[130px] w-full h-full ${
-        locked && 'grayscale'
-      } ${
-        completed && 'brightness-150'
-      } bg-cover bg-no-repeat cursor-pointer hover:brightness-150 transition`}
-      style={{backgroundImage: `url('${image}')`}}
-    >
-      <div>
+    <div className="">
+      <div className="relative flex flex-col items-center w-full">
         {locked ? (
-          <img
-            src="challenge-lock.svg"
-            alt=""
-            className="max-h-[103px] max-w-[100px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
-          />
-        ) : completed ? (
           <>
+            <img
+              src="challenge-lock.svg"
+              alt=""
+              className="absolute z-10 w-[8rem] md:w-full"
+            />
+            <img
+              src="gpu.png"
+              alt=""
+              className="w-[8rem] md:w-full grayscale"
+            />
+          </>
+        ) : completed ? (
+          <div className="relative">
             <img
               src="crow-icon.svg"
               alt=""
               className="absolute -top-8 -right-6"
             />
-            <img
-              src='challenge-completed.svg'
-              alt=""
-              className="max-h-[133px] max-w-[130px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
-            />
-          </>
+            <div className="relative">
+              <img
+                src="challenge-completed.svg"
+                alt=""
+                className="absolute z-10 w-[8rem] md:w-full"
+              />
+              <img
+                src="gpu.png"
+                alt=""
+                className="w-[8rem] md:w-full brightness-110"
+              />
+            </div>
+          </div>
         ) : (
-          <img
-            src={image}
-            alt=""
-            className="max-h-[103px] max-w-[100px] md:max-h-[133px] md:max-w-[130px] w-full h-full"
-          />
+          <img src="gpu.png" alt="" className="w-[8rem] md:w-full" />
         )}
-        <p
-          className={`text-center text-[11px] mt-4 ${
-            completed
-              ? 'text-yellow-300 font-semibold'
-              : locked
-              ? 'text-gray-500'
-              : 'text-gray-300'
-          } md:text-[15px]`}
-        >
-          Classificação do Brasileirão
-        </p>
-        <span
-          className={`flex justify-center items-center mt-4 ${
-            completed ? 'text-yellow-300' : 'text-gray-600'
-          } font-semibold text-lg md:text-xl pb-40 lg:pb-0`}
-        >
-          +{xp}
-        </span>
+
+        <div className="max-w-[150px] text-center">
+          <p
+            className={`text-center text-[11px] mt-4 ${
+              completed
+                ? 'text-yellow-300 font-semibold'
+                : locked
+                ? 'text-gray-500'
+                : 'text-gray-300'
+            } md:text-[15px]`}
+          >
+            Classificação do Brasileirão
+          </p>
+          <span
+            className={`inline-block mt-4 ${
+              completed ? 'text-yellow-300' : 'text-gray-600'
+            } font-semibold text-lg md:text-x lg:pb-0`}
+          >
+            +{xp}
+          </span>
+        </div>
       </div>
     </div>
   );
