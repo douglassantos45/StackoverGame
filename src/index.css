@@ -5,3 +5,27 @@
 .screen-calc {
   height: calc(100vh - 7rem);
 }
+
+/* width */
+.scroll-table::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  border-radius: 6px 0 6px 0;
+}
+
+/* Track */
+.scroll-table::-webkit-scrollbar-track {
+  background: #121214;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Handle */
+.scroll-table::-webkit-scrollbar-thumb {
+  background: #424752;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+.scroll-table::-webkit-scrollbar-thumb:hover {
+  background: #9f9f9f;
+}
