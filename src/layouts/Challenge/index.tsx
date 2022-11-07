@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { HeaderBar } from './HeaderBar';
 import { Problem } from './Problem';
 import { VerifyButton } from './VerifyButton';
