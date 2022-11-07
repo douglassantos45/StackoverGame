@@ -21,11 +21,11 @@
 
 /* Handle */
 .scroll-table::-webkit-scrollbar-thumb {
-  background: #424752;
+  background: #121214;
   border-radius: 6px;
 }
 
 /* Handle on hover */
-.scroll-table::-webkit-scrollbar-thumb:hover {
-  background: #9f9f9f;
+.scroll-table:hover::-webkit-scrollbar-thumb {
+  background: #424752;
 }
