@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 export const Login = () => {
+  const navigate = useNavigate()
   return (
     <div className="flex h-screen w-full">
       <div className="hidden lg:flex justify-center items-center bg-purple-1000 w-full">
@@ -18,7 +21,7 @@ export const Login = () => {
           </h1>
 
           <section className="flex items-center justify-center mt-20 w-full">
-            <button className="flex items-center justify-center gap-5 bg-gray-50 hover:bg-gray-200 text-blue-700 py-4 px-6 rounded-lg max-w-[530px] w-full text-lg transition">
+            <button className="flex items-center justify-center gap-5 bg-gray-50 hover:bg-gray-200 text-blue-700 py-4 px-6 rounded-lg max-w-[530px] w-full text-lg transition" onClick={() => navigate('/home')}>
               <img src="google-img.png" alt="" className="w-8" /> Google
             </button>
           </section>
