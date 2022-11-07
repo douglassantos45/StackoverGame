@@ -6,7 +6,7 @@ export const Sidebar = () => {
       <nav className="hidden md:block max-w-[284px] w-full bg-background">
         <ul className="flex flex-col items-start gap-5 text-lg">
           <li className="ml-2">
-            <ActiveLink to="/" icon="fa-solid fa-award">
+            <ActiveLink to="/home" icon="fa-solid fa-award">
               <span className="ml-2">Desafios</span>
             </ActiveLink>
           </li>
