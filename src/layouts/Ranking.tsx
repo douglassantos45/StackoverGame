@@ -1,5 +1,4 @@
 import { Sidebar } from '../components/Sidebar';
-import * as ScrollArea from '@radix-ui/react-scroll-area';
 
 export const Ranking = () => {
   const TAGS = Array.from({ length: 50 }).map(
