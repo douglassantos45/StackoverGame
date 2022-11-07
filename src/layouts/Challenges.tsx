@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { ChallengeCard } from '../components/ChallengeCard';
 
 export const Challenges = () => {
@@ -12,40 +13,16 @@ export const Challenges = () => {
       </div>
       <Level level={1}>
         <div className="flex flex-wrap mt-10 justify-center gap-10">
-        <ChallengeCard
-            title=""
-            description=""
-            completed={true}
-            locked={false}
-            xp={35}
-            image="gpu.png"
-          />
-          <ChallengeCard
-            title=""
-            description=""
-            completed={false}
-            locked={false}
-            xp={35}
-            image="gpu.png"
-          />
-
-          <ChallengeCard
-            title=""
-            description=""
-            completed={false}
-            locked={true}
-            xp={35}
-            image="gpu.png"
-          />
-
-          <ChallengeCard
-            title=""
-            description=""
-            completed={false}
-            locked={true}
-            xp={35}
-            image="gpu.png"
-          />
+          <Link to={'/challenge'}>
+            <ChallengeCard
+              title=""
+              description=""
+              completed={true}
+              locked={false}
+              xp={35}
+              image="gpu.png"
+            />
+          </Link>
         </div>
       </Level>
     </section>
