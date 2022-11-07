@@ -18,12 +18,7 @@ module.exports = {
           'linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 67.08%)',
       },
       fontFamily: {
-        body: 'Roboto Mono, sans-serif',
-        // eslint-disable-next-line quotes
-        heading: 'Roboto Slab, sans-serif',
-        sans: '"Roboto Mono"',
-        serif: 'Roboto Mono',
-        mono: 'Roboto Mono',
+        sans: '"Roboto"',
       },
     },
   },
