@@ -24,7 +24,7 @@ export const Challenge = () => {
   };
 
   return (
-    <div className="flex flex-col max-w-[1440px] h-screen mx-auto">
+    <div className="flex flex-col max-w-[1440px] h-screen mx-auto px-12">
       <HeaderBar ref={barRef} />
 
       <main className="relative mt-24 h-full">
