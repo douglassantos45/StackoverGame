@@ -1,7 +1,51 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { app } from '../services/firebaseConfig';
+
+type UserProps = {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL?: string;
+};
+
+const provider = new GoogleAuthProvider();
 
 export const Login = () => {
-  const navigate = useNavigate()
+  const [inputs, setInputs] = useState({} as UserProps);
+
+  const auth = getAuth(app);
+
+  const sigInGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (credential) {
+          const token = credential.accessToken;
+          const { displayName, email, uid, photoURL } = result.user;
+
+          localStorage.setItem(
+            'react.auth.user',
+            JSON.stringify({
+              uid,
+              displayName,
+              email,
+              photoURL,
+              token,
+            })
+          );
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  };
+
+  const navigate = useNavigate();
   return (
     <div className="flex h-screen w-full">
       <div className="hidden lg:flex justify-center items-center bg-purple-1000 w-full">
@@ -21,7 +65,10 @@ export const Login = () => {
           </h1>
 
           <section className="flex items-center justify-center mt-20 w-full">
-            <button className="flex items-center justify-center gap-5 bg-gray-50 hover:bg-gray-200 text-blue-700 py-4 px-6 rounded-lg max-w-[530px] w-full text-lg transition" onClick={() => navigate('/home')}>
+            <button
+              className="flex items-center justify-center gap-5 bg-gray-50 hover:bg-gray-200 text-blue-700 py-4 px-6 rounded-lg max-w-[530px] w-full text-lg transition"
+              onClick={sigInGoogle}
+            >
               <img src="google-img.png" alt="" className="w-8" /> Google
             </button>
           </section>

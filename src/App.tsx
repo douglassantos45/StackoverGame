@@ -1,9 +1,7 @@
 import { Login } from './layouts/Login';
 
 const App = () => {
-  return (
-    <Login />
-  );
+  return <Login />;
 };
 
 export default App;
