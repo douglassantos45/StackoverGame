@@ -17,6 +17,8 @@ export const Login = () => {
 
   const auth = getAuth(app);
 
+  const navigate = useNavigate();
+
   const sigInGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -35,6 +37,7 @@ export const Login = () => {
               token,
             })
           );
+          navigate('/home')
         }
       })
       .catch((error) => {
@@ -45,7 +48,6 @@ export const Login = () => {
       });
   };
 
-  const navigate = useNavigate();
   return (
     <div className="flex h-screen w-full">
       <div className="hidden lg:flex justify-center items-center bg-purple-1000 w-full">

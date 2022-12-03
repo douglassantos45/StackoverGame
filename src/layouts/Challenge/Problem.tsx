@@ -1,35 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { problems } from './mock/problems';
 
-export const Problem = () => {
-  const words = ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'];
-  const wordsNoReat = new Set<string>();
+type ProblemProps = {
+  problem: {
+    id: string | number;
+    problem: string;
+    description: string;
+    correctWords: string[];
+    randomWords: string[];
+    xp: number;
+  };
+};
 
-  Array.from({ length: words.length - 1 }).map(() => {
-    wordsNoReat.add(words[Math.floor(Math.random() * words.length)]);
-  });
+export const Problem = ({ problem }: ProblemProps) => {
+  const [selectedWords, setSelectedWords] = useState<string[]>([]);
 
-  [...wordsNoReat].map((word) => console.log(word));
+  const handleSlectWords = (word: string) => {
+    if (selectedWords.includes(word)) {
+      const wordMatch: string[] = [];
+      for (let i = 0; i < selectedWords.length; i++) {
+        if (selectedWords[i] !== word) {
+          wordMatch.push(selectedWords[i]);
+        }
+      }
+      setSelectedWords(wordMatch);
+    } else {
+      if (selectedWords.length >= problem.correctWords.length) return;
+      setSelectedWords([...selectedWords, word]);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem('react.words', JSON.stringify(selectedWords));
+  }, [selectedWords]);  
 
   return (
     <section className="h-full flex flex-col">
       <h1 className="text-2xl">Resolva o problema:</h1>
 
       <div className="flex flex-col items-center justify-center flex-1 w-full">
-        <p className="mb-32">problems</p>
+        <p className="mb-32 text-2xl">{problem.problem}</p>
         <div className="flex flex-wrap mt-32 gap-2 max-w-md items-center justify-center">
-          {[...wordsNoReat].map((word, key) => (
+          {[...problem.randomWords].map((word: string, key) => (
             <button
               key={key}
-              className={`border border-purple-800 px-6 py-1 rounded-lg text-lg font-bold`}
+              onClick={() => handleSlectWords(word)}
+              className={`border border-purple-800 px-6 py-1 rounded-lg text-lg font-bold ${
+                selectedWords.includes(word)
+                  ? 'bg-purple-1000/50 border border-purple-800 px-6 py-1 rounded-lg text-lg text-purple-400'
+                  : ''
+              }`}
             >
               {word}
             </button>
           ))}
-          <button
-            className={`bg-purple-1000/50 border border-purple-800 px-6 py-1 rounded-lg text-lg text-purple-400`}
-          >
-            while
-          </button>
         </div>
       </div>
     </section>

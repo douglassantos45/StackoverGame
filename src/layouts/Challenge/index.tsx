@@ -1,13 +1,32 @@
 import { useRef } from 'react';
 import { HeaderBar } from './HeaderBar';
+import { problems } from './mock/problems';
 import { Problem } from './Problem';
 import { VerifyButton } from './VerifyButton';
 
-const CHALLENGE_NUMBER = 10;
+const CHALLENGE_NUMBER = problems.length;
 
 export const Challenge = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const barRef = useRef<HTMLDivElement>(null!);
+  const correctWords = ['if', 'while'];
+
+  const checkWords = () => {
+    const words = JSON.parse(localStorage.getItem('react.words') as any);
+
+    let success = false;
+
+    for (let i = 0; i < words.length; i++) {
+      correctWords[i] === words[i] ? (success = true) : (success = false);
+    }
+
+    if (success) {
+      alert('Você acertou');
+    } else {
+      alert('Você errou');
+    }
+    return incrementBar();
+  };
 
   const incrementBar = () => {
     if (barRef) {
@@ -31,11 +50,20 @@ export const Challenge = () => {
         <div className="cursor-pointer">
           <img src="bell-icon.svg" className="absolute right-0 top-8 w-8" />
         </div>
-        <Problem />
+        <Problem
+          problem={{
+            id: 1,
+            problem: `??(3 === 3) {console.log("acertou")}`,
+            description: 'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
+            correctWords: ['if'],
+            randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
+            xp: 56,
+          }}
+        />
       </main>
 
       <footer className="flex items-center h-32 justify-end">
-        <VerifyButton incrementBar={incrementBar} />
+        <VerifyButton onClick={checkWords} incrementBar={incrementBar} />
       </footer>
     </div>
   );

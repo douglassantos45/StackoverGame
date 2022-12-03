@@ -4,15 +4,37 @@ import { Home } from './layouts/Home';
 import App from './App';
 import { Ranking } from './layouts/Ranking';
 import { Challenge } from './layouts/Challenge';
+import { PrivateRouter } from './components/PrivateRouter';
 
 export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="home" element={<Home />} />
-        <Route path="challenge" element={<Challenge />} />
-        <Route path="ranking" element={<Ranking />} />
+        <Route
+          path="home"
+          element={
+            <PrivateRouter>
+              <Home />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="challenge"
+          element={
+            <PrivateRouter>
+              <Challenge />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="ranking"
+          element={
+            <PrivateRouter>
+              <Ranking />
+            </PrivateRouter>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
