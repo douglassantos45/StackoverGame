@@ -20,7 +20,7 @@ export const Header = () => {
         <UIDropdownMenu.Root>
           <UIDropdownMenu.Trigger className=" cursor-pointer outline-0">
             <img
-              src={user.photoURL}
+              src={user?.photoURL}
               alt=""
               className="max-w-[40px] rounded-full"
             />

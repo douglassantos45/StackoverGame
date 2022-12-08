@@ -1,8 +1,11 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ChallengeCard } from '../components/ChallengeCard';
+import { useProblemContext } from '../contexts/problemContext';
 
 export const Challenges = () => {
+  const { completed } = useProblemContext();
+
   return (
     <section className="bg-background w-full">
       <div className="text-center mb-10">
@@ -17,7 +20,7 @@ export const Challenges = () => {
             <ChallengeCard
               title=""
               description=""
-              completed={true}
+              completed={completed}
               locked={false}
               xp={35}
               image="gpu.png"

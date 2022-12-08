@@ -23,6 +23,7 @@ export const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
+
         if (credential) {
           const token = credential.accessToken;
           const { displayName, email, uid, photoURL } = result.user;
@@ -37,7 +38,7 @@ export const Login = () => {
               token,
             })
           );
-          navigate('/home')
+          window.location.href = 'http://localhost:5173/home';
         }
       })
       .catch((error) => {

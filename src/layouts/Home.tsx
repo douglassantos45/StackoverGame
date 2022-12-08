@@ -8,7 +8,7 @@ export type UserProps = {
   email: string;
   photoURL: string;
   token: string;
-}
+};
 
 export const Home = () => {
   return (

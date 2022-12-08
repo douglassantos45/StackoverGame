@@ -1,6 +1,9 @@
 import { useRef } from 'react';
+import { useModalContext } from '../../contexts/modalContext';
+import { useProblemContext } from '../../contexts/problemContext';
 import { HeaderBar } from './HeaderBar';
 import { problems } from './mock/problems';
+import { Modal } from './Model';
 import { Problem } from './Problem';
 import { VerifyButton } from './VerifyButton';
 
@@ -11,8 +14,45 @@ export const Challenge = () => {
   const barRef = useRef<HTMLDivElement>(null!);
   const correctWords = ['if', 'while'];
 
+  const { next, nextProblem, handleCompleteProblem } = useProblemContext();
+  const { open, isOpen } = useModalContext();
+
+  const arr = [
+    {
+      id: 1,
+      problem: `??(3 === 3) {console.log("acertou")}`,
+      description:
+        'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
+      correctWords: ['if', 'for'],
+      randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
+      xp: 56,
+    },
+    {
+      id: 2,
+      problem: `??(3 === 3) {console.log("errou")}`,
+      description:
+        'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
+      correctWords: ['if', 'for'],
+      randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
+      xp: 56,
+    },
+    {
+      id: 3,
+      problem: `??(3 === 3) {console.log("bugou")}`,
+      description:
+        'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
+      correctWords: ['if', 'for'],
+      randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
+      xp: 56,
+    },
+  ];
+
   const checkWords = () => {
-    const words = JSON.parse(localStorage.getItem('react.words') as any);
+    const words = JSON.parse(
+      localStorage.getItem('react.words') as any
+    ) as string[];
+
+    if (words.length <= 0) return alert('Escolha as opções');
 
     let success = false;
 
@@ -25,6 +65,9 @@ export const Challenge = () => {
     } else {
       alert('Você errou');
     }
+
+    next < arr.length - 1 ? nextProblem() : handleCompleteProblem();
+    open();
     return incrementBar();
   };
 
@@ -47,24 +90,17 @@ export const Challenge = () => {
       <HeaderBar ref={barRef} />
 
       <main className="relative mt-24 h-full">
-        <div className="cursor-pointer">
+        <div className="cursor-pointer" onClick={open}>
           <img src="bell-icon.svg" className="absolute right-0 top-8 w-8" />
         </div>
-        <Problem
-          problem={{
-            id: 1,
-            problem: `??(3 === 3) {console.log("acertou")}`,
-            description: 'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
-            correctWords: ['if'],
-            randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
-            xp: 56,
-          }}
-        />
+        <Problem problem={arr[next]} />
       </main>
 
       <footer className="flex items-center h-32 justify-end">
         <VerifyButton onClick={checkWords} incrementBar={incrementBar} />
       </footer>
+
+      {isOpen && <Modal />}
     </div>
   );
 };

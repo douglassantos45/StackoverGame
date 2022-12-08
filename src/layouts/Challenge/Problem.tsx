@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { problems } from './mock/problems';
+import { useProblemContext } from '../../contexts/problemContext';
 
 type ProblemProps = {
   problem: {
@@ -14,6 +14,7 @@ type ProblemProps = {
 
 export const Problem = ({ problem }: ProblemProps) => {
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
+  const { next } = useProblemContext();
 
   const handleSlectWords = (word: string) => {
     if (selectedWords.includes(word)) {
@@ -23,6 +24,7 @@ export const Problem = ({ problem }: ProblemProps) => {
           wordMatch.push(selectedWords[i]);
         }
       }
+
       setSelectedWords(wordMatch);
     } else {
       if (selectedWords.length >= problem.correctWords.length) return;
@@ -32,7 +34,9 @@ export const Problem = ({ problem }: ProblemProps) => {
 
   useEffect(() => {
     localStorage.setItem('react.words', JSON.stringify(selectedWords));
-  }, [selectedWords]);  
+  }, [selectedWords]);
+
+  useEffect(() => setSelectedWords([]), [next]);
 
   return (
     <section className="h-full flex flex-col">
