@@ -1,12 +1,16 @@
 import * as UIDropdownMenu from '@radix-ui/react-dropdown-menu';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { UserProps } from '../layouts/Home';
 
 export const Header = () => {
-  const getLocalStorage = localStorage.getItem('react.auth.user');
-  if (!getLocalStorage) return <Navigate to="/home" />;
+  const [user, setUser] = useState({} as UserProps);
 
-  const user = JSON.parse(getLocalStorage) as UserProps;
+  useEffect(() => {
+    const user = JSON.parse(
+      localStorage.getItem('react.auth.user') as any
+    ) as UserProps;
+    setUser(user);
+  }, []);
 
   return (
     <header className="py-4 mb-16 w-full h-20 bg-background px-4 fixed inset-0 z-50">
@@ -20,7 +24,7 @@ export const Header = () => {
         <UIDropdownMenu.Root>
           <UIDropdownMenu.Trigger className=" cursor-pointer outline-0">
             <img
-              src={user?.photoURL}
+              src={user.photoURL}
               alt=""
               className="max-w-[40px] rounded-full"
             />
