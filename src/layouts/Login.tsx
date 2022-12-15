@@ -28,6 +28,8 @@ export const Login = () => {
           const token = credential.accessToken;
           const { displayName, email, uid, photoURL } = result.user;
 
+          console.log(result);
+
           localStorage.setItem(
             'react.auth.user',
             JSON.stringify({

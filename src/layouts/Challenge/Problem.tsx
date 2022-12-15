@@ -1,23 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useProblemContext } from '../../contexts/problemContext';
 
-type ProblemProps = {
-  problem: {
-    id: string | number;
-    problem: string;
-    description: string;
-    correctWords: string[];
-    randomWords: string[];
-    xp: number;
-  };
+export type ProblemProps = {
+  id: string | number;
 };
 
-export const Problem = ({ problem }: ProblemProps) => {
+export const Problem = ({ id }: ProblemProps) => {
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const { next } = useProblemContext();
 
   const handleSlectWords = (word: string) => {
-    if (selectedWords.includes(word)) {
+    /* if (selectedWords.includes(word)) {
       const wordMatch: string[] = [];
       for (let i = 0; i < selectedWords.length; i++) {
         if (selectedWords[i] !== word) {
@@ -27,25 +20,27 @@ export const Problem = ({ problem }: ProblemProps) => {
 
       setSelectedWords(wordMatch);
     } else {
-      if (selectedWords.length >= problem.correctWords.length) return;
+      if (selectedWords.length >= problem?.correctWords.length) return;
       setSelectedWords([...selectedWords, word]);
-    }
+    } */
   };
 
   useEffect(() => {
     localStorage.setItem('react.words', JSON.stringify(selectedWords));
   }, [selectedWords]);
 
-  useEffect(() => setSelectedWords([]), [next]);
+  useEffect(() => {
+    setSelectedWords([]);
+  }, [next]);
 
   return (
     <section className="h-full flex flex-col">
-      <h1 className="text-2xl">Resolva o problema:</h1>
+      {/* <h1 className="text-2xl">Resolva o problema:</h1>
 
       <div className="flex flex-col items-center justify-center flex-1 w-full">
-        <p className="mb-32 text-2xl">{problem.problem}</p>
+        <p className="mb-32 text-2xl">{problem?.problem}</p>
         <div className="flex flex-wrap mt-32 gap-2 max-w-md items-center justify-center">
-          {[...problem.randomWords].map((word: string, key) => (
+          {[...problem.randomWords.split(',')].map((word: string, key) => (
             <button
               key={key}
               onClick={() => handleSlectWords(word)}
@@ -59,7 +54,7 @@ export const Problem = ({ problem }: ProblemProps) => {
             </button>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

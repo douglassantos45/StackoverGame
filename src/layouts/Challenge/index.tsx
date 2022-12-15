@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useChallengeContext } from '../../contexts/challengeContext';
 import { useModalContext } from '../../contexts/modalContext';
 import { useProblemContext } from '../../contexts/problemContext';
 import { HeaderBar } from './HeaderBar';
@@ -16,36 +17,6 @@ export const Challenge = () => {
 
   const { next, nextProblem, handleCompleteProblem } = useProblemContext();
   const { open, isOpen } = useModalContext();
-
-  const arr = [
-    {
-      id: 1,
-      problem: `??(3 === 3) {console.log("acertou")}`,
-      description:
-        'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
-      correctWords: ['if', 'for'],
-      randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
-      xp: 56,
-    },
-    {
-      id: 2,
-      problem: `??(3 === 3) {console.log("errou")}`,
-      description:
-        'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
-      correctWords: ['if', 'for'],
-      randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
-      xp: 56,
-    },
-    {
-      id: 3,
-      problem: `??(3 === 3) {console.log("bugou")}`,
-      description:
-        'Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools',
-      correctWords: ['if', 'for'],
-      randomWords: ['for', 'while', 'if', 'break', 'i++', 'const', 'forEach'],
-      xp: 56,
-    },
-  ];
 
   const checkWords = () => {
     const words = JSON.parse(
@@ -66,9 +37,15 @@ export const Challenge = () => {
       alert('Você errou');
     }
 
-    next < arr.length - 1 ? nextProblem() : handleCompleteProblem();
+    if (success) {
+      nextProblem();
+      incrementBar();
+    } else {
+      const result = handleCompleteProblem();
+      //setChallengeDB();
+      alert('finalizou');
+    }
     open();
-    return incrementBar();
   };
 
   const incrementBar = () => {
@@ -93,7 +70,7 @@ export const Challenge = () => {
         <div className="cursor-pointer" onClick={open}>
           <img src="bell-icon.svg" className="absolute right-0 top-8 w-8" />
         </div>
-        <Problem problem={arr[next]} />
+        {/* <Problem problem={challengeData.problems.split(',')[next]} /> */}
       </main>
 
       <footer className="flex items-center h-32 justify-end">

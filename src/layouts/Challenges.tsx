@@ -1,11 +1,12 @@
-import { ReactNode } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChallengeCard } from '../components/ChallengeCard';
+import { useChallengeContext } from '../contexts/challengeContext';
 import { useProblemContext } from '../contexts/problemContext';
+import { firebaseDB } from '../services/firebaseConfig';
 
 export const Challenges = () => {
-  const { completed } = useProblemContext();
-
   return (
     <section className="bg-background w-full">
       <div className="text-center mb-10">
@@ -17,14 +18,18 @@ export const Challenges = () => {
       <Level level={1}>
         <div className="flex flex-wrap mt-10 justify-center gap-10">
           <Link to={'/challenge'}>
-            <ChallengeCard
-              title=""
-              description=""
-              completed={completed}
-              locked={false}
-              xp={35}
-              image="gpu.png"
-            />
+            {/* {problems.length > 0 &&
+              problems.map((problem) => (
+                <ChallengeCard
+                  key={problem.id}
+                  description={problem.description}
+                  completed={problem.completed}
+                  locked={problem.locked}
+                  title={problem.name}
+                  xp={problem.xp}
+                  image="gpu.png"
+                />
+              ))} */}
           </Link>
         </div>
       </Level>

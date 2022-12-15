@@ -1,4 +1,5 @@
-import { collection, getDocs } from 'firebase/firestore';
+/* eslint-disable camelcase */
+import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
@@ -6,54 +7,35 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { ProblemProps } from '../layouts/Challenge/Problem';
 import { firebaseDB } from '../services/firebaseConfig';
 
 type ChallengeProps = {
+  problems: string;
+};
+
+type UserChallengeProps = {
+  id: string;
   challenge_id: string;
+  user_id: string;
   completed: boolean;
   locked: boolean;
   name: string;
   xp: number;
 };
 
-type ChallengeContextData = {
-  setChallengeDB(data: ChallengeProps): void;
-  challengeData: any;
-};
+// eslint-disable-next-line @typescript-eslint/ban-types
+type ChallengeContextData = {};
 
 type ChallengeProviderProps = {
   children: ReactNode;
 };
 
-const ChallengeContext = createContext<ChallengeContextData | undefined>(
-  undefined
-);
+const ChallengeContext = createContext<ChallengeContextData | undefined>(null!);
 
 export const ChallengeProvider = ({ children }: ChallengeProviderProps) => {
-  const [challengeData, setChallengeData] = useState({} as ChallengeProps);
-
-  const db = collection(firebaseDB, 'challenges');
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(db);
-      console.log(data.docs[0].data());
-      setChallengeData(data.docs[0].data() as ChallengeProps);
-    };
-    const user = JSON.parse(localStorage.getItem('react.auth.user') as any);
-    if (user?.uid) {
-      getUsers();
-    }
-  }, []);
-
-  const setChallengeDB = (data: ChallengeProps) => {
-    setChallengeData(data);
-  };
-
   return (
-    <ChallengeContext.Provider value={{ setChallengeDB, challengeData }}>
-      {children}
-    </ChallengeContext.Provider>
+    <ChallengeContext.Provider value={{}}>{children}</ChallengeContext.Provider>
   );
 };
 

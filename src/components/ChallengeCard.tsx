@@ -65,7 +65,7 @@ export const ChallengeCard = ({
                 : 'text-gray-300'
             } md:text-[15px]`}
           >
-            Classificação do Brasileirão
+            {title}
           </p>
           <span
             className={`inline-block mt-4 ${
