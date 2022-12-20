@@ -9,7 +9,7 @@ import { VerifyButton } from './VerifyButton';
 
 const problems = JSON.parse(localStorage.getItem('react.challenge.1') as any);
 
-const CHALLENGE_NUMBER = problems.length;
+const CHALLENGE_NUMBER = problems && problems.length;
 
 export const Challenge = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
