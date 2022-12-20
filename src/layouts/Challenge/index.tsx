@@ -18,6 +18,7 @@ export const Challenge = () => {
     nextProblem,
     handleCompleteProblem,
     challengesId,
+    resetNext,
     handleSaveChallengeId,
   } = useProblemContext();
   const { open, isOpen } = useModalContext();
@@ -57,6 +58,7 @@ export const Challenge = () => {
       handleSaveChallengeId(
         window.location.pathname.replace('/challenge/', '')
       );
+      resetNext();
       alert('finalizou');
     }
     incrementBar();
