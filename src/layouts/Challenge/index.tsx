@@ -36,7 +36,6 @@ export const Challenge = () => {
     if (words.length <= 0) return alert('Escolha as opções');
 
     let success = false;
-    console.log(correctWords[0].trim(), words[0].trim());
 
     for (let i = 0; i < words.length; i++) {
       correctWords[i].trim() === words[i].trim()
