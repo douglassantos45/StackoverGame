@@ -6,6 +6,10 @@ import { useProblemContext } from '../contexts/problemContext';
 export const Challenges = () => {
   const { completed, challengesId } = useProblemContext();
 
+  const challenges = JSON.parse(
+    localStorage.getItem('react.challenges') as any
+  );
+
   return (
     <section className="bg-background w-full">
       <div className="text-center mb-10">
@@ -16,18 +20,18 @@ export const Challenges = () => {
       </div>
       <Level level={1}>
         <div className="flex flex-wrap mt-10 justify-center gap-10">
-          {Array.from({ length: 4 }).map((_, key) => (
+          {challenges.map((data: any, key: number) => (
             <Link to={'/challenge/' + Number(key + 1)} key={key}>
               <ChallengeCard
-                description={'problem.description'}
+                description={data.description}
                 completed={
                   challengesId.includes(String(Number(key + 1)))
                     ? completed
                     : false
                 }
                 locked={false}
-                title={'problem.name'}
-                xp={35}
+                title={data.name}
+                xp={data.xp || 3}
                 image="gpu.png"
               />
             </Link>

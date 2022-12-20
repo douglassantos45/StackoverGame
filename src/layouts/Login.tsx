@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app } from '../services/firebaseConfig';
 
+import { problems } from './Challenge/mock/problems';
+
 type UserProps = {
   uid: string;
   displayName: string;
@@ -11,6 +13,8 @@ type UserProps = {
 };
 
 const provider = new GoogleAuthProvider();
+
+localStorage.setItem('react.challenges', JSON.stringify(problems));
 
 export const Login = () => {
   const [inputs, setInputs] = useState({} as UserProps);

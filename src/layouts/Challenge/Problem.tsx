@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useProblemContext } from '../../contexts/problemContext';
+import { useModalContext } from '../../contexts/modalContext';
 
 export type ProblemProps = {
   problem: any;
@@ -8,6 +9,8 @@ export type ProblemProps = {
 export const Problem = ({ problem }: ProblemProps) => {
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const { next } = useProblemContext();
+
+  const { open } = useModalContext();
 
   const handleSlectWords = (word: string) => {
     if (selectedWords.includes(word)) {
@@ -33,6 +36,8 @@ export const Problem = ({ problem }: ProblemProps) => {
   useEffect(() => {
     setSelectedWords([]);
   }, [next]);
+
+  useEffect(() => open(), []);
 
   return (
     <section className="h-full flex flex-col">

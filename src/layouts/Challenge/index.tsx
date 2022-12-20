@@ -7,10 +7,6 @@ import { Modal } from './Model';
 import { Problem } from './Problem';
 import { VerifyButton } from './VerifyButton';
 
-const problems = JSON.parse(localStorage.getItem('react.challenge.1') as any);
-
-const CHALLENGE_NUMBER = problems && problems.length;
-
 export const Challenge = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const {
@@ -24,10 +20,13 @@ export const Challenge = () => {
   const { open, isOpen } = useModalContext();
   const barRef = useRef<HTMLDivElement>(null!);
 
-  const correctWords = problems[next].correctWords?.split(',');
+  const json = JSON.parse(localStorage.getItem('react.challenges') as any);
 
-  const json = localStorage.getItem('react.challenge.1') as any;
-  const data = JSON.parse(json);
+  const data =
+    json[Number(window.location.pathname.replace('/challenge/', '')) - 1];
+
+  const correctWords = data.problems[next].correctWords?.split(',');
+  const CHALLENGE_NUMBER = data.problems && data.problems.length;
 
   const checkWords = () => {
     const words = JSON.parse(
@@ -50,7 +49,7 @@ export const Challenge = () => {
       alert('Você errou');
     }
 
-    if (next < problems.length - 1) {
+    if (next < data.problems.length - 1) {
       nextProblem();
       open();
     } else {
@@ -59,6 +58,7 @@ export const Challenge = () => {
         window.location.pathname.replace('/challenge/', '')
       );
       resetNext();
+
       alert('finalizou');
     }
     incrementBar();
@@ -86,14 +86,14 @@ export const Challenge = () => {
         <div className="cursor-pointer" onClick={open}>
           <img src="bell-icon.svg" className="absolute right-0 top-8 w-8" />
         </div>
-        <Problem problem={data[next]} />
+        <Problem problem={data.problems[next]} />
       </main>
 
       <footer className="flex items-center h-32 justify-end">
         <VerifyButton onClick={checkWords} incrementBar={incrementBar} />
       </footer>
 
-      {isOpen && <Modal description={data[next].description} />}
+      {isOpen && <Modal description={data.problems[next].description} />}
     </div>
   );
 };
