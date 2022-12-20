@@ -3,20 +3,30 @@ import { useChallengeContext } from '../../contexts/challengeContext';
 import { useModalContext } from '../../contexts/modalContext';
 import { useProblemContext } from '../../contexts/problemContext';
 import { HeaderBar } from './HeaderBar';
-import { problems } from './mock/problems';
 import { Modal } from './Model';
 import { Problem } from './Problem';
 import { VerifyButton } from './VerifyButton';
+
+const problems = JSON.parse(localStorage.getItem('react.challenge.1') as any);
 
 const CHALLENGE_NUMBER = problems.length;
 
 export const Challenge = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const barRef = useRef<HTMLDivElement>(null!);
-  const correctWords = ['if', 'while'];
-
-  const { next, nextProblem, handleCompleteProblem } = useProblemContext();
+  const {
+    next,
+    nextProblem,
+    handleCompleteProblem,
+    challengesId,
+    handleSaveChallengeId,
+  } = useProblemContext();
   const { open, isOpen } = useModalContext();
+  const barRef = useRef<HTMLDivElement>(null!);
+
+  const correctWords = problems[next].correctWords?.split(',');
+
+  const json = localStorage.getItem('react.challenge.1') as any;
+  const data = JSON.parse(json);
 
   const checkWords = () => {
     const words = JSON.parse(
@@ -26,9 +36,12 @@ export const Challenge = () => {
     if (words.length <= 0) return alert('Escolha as opções');
 
     let success = false;
+    console.log(correctWords[0].trim(), words[0].trim());
 
     for (let i = 0; i < words.length; i++) {
-      correctWords[i] === words[i] ? (success = true) : (success = false);
+      correctWords[i].trim() === words[i].trim()
+        ? (success = true)
+        : (success = false);
     }
 
     if (success) {
@@ -37,15 +50,17 @@ export const Challenge = () => {
       alert('Você errou');
     }
 
-    if (success) {
+    if (next < problems.length - 1) {
       nextProblem();
-      incrementBar();
+      open();
     } else {
-      const result = handleCompleteProblem();
-      //setChallengeDB();
+      handleCompleteProblem();
+      handleSaveChallengeId(
+        window.location.pathname.replace('/challenge/', '')
+      );
       alert('finalizou');
     }
-    open();
+    incrementBar();
   };
 
   const incrementBar = () => {
@@ -70,14 +85,14 @@ export const Challenge = () => {
         <div className="cursor-pointer" onClick={open}>
           <img src="bell-icon.svg" className="absolute right-0 top-8 w-8" />
         </div>
-        {/* <Problem problem={challengeData.problems.split(',')[next]} /> */}
+        <Problem problem={data[next]} />
       </main>
 
       <footer className="flex items-center h-32 justify-end">
         <VerifyButton onClick={checkWords} incrementBar={incrementBar} />
       </footer>
 
-      {isOpen && <Modal />}
+      {isOpen && <Modal description={data[next].description} />}
     </div>
   );
 };

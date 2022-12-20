@@ -1,5 +1,6 @@
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
+import { useChallengeContext } from '../contexts/challengeContext';
 import { Challenges } from './Challenges';
 
 export type UserProps = {

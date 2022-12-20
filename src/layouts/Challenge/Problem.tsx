@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { useProblemContext } from '../../contexts/problemContext';
 
 export type ProblemProps = {
-  id: string | number;
+  problem: any;
 };
 
-export const Problem = ({ id }: ProblemProps) => {
+export const Problem = ({ problem }: ProblemProps) => {
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const { next } = useProblemContext();
 
   const handleSlectWords = (word: string) => {
-    /* if (selectedWords.includes(word)) {
+    if (selectedWords.includes(word)) {
       const wordMatch: string[] = [];
       for (let i = 0; i < selectedWords.length; i++) {
         if (selectedWords[i] !== word) {
@@ -20,9 +20,10 @@ export const Problem = ({ id }: ProblemProps) => {
 
       setSelectedWords(wordMatch);
     } else {
-      if (selectedWords.length >= problem?.correctWords.length) return;
+      if (selectedWords.length >= problem.correctWords.split(',').length)
+        return;
       setSelectedWords([...selectedWords, word]);
-    } */
+    }
   };
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export const Problem = ({ id }: ProblemProps) => {
 
   return (
     <section className="h-full flex flex-col">
-      {/* <h1 className="text-2xl">Resolva o problema:</h1>
+      <h1 className="text-2xl">Resolva o problema:</h1>
 
       <div className="flex flex-col items-center justify-center flex-1 w-full">
         <p className="mb-32 text-2xl">{problem?.problem}</p>
@@ -54,7 +55,7 @@ export const Problem = ({ id }: ProblemProps) => {
             </button>
           ))}
         </div>
-      </div> */}
+      </div>
     </section>
   );
 };

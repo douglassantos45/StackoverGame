@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { app } from '../services/firebaseConfig';
 
@@ -27,8 +27,6 @@ export const Login = () => {
         if (credential) {
           const token = credential.accessToken;
           const { displayName, email, uid, photoURL } = result.user;
-
-          console.log(result);
 
           localStorage.setItem(
             'react.auth.user',

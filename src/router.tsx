@@ -20,7 +20,7 @@ export const Router = () => {
           }
         />
         <Route
-          path="challenge"
+          path="challenge/:id"
           element={
             <PrivateRouter>
               <Challenge />

@@ -2,7 +2,7 @@ import { ActiveLink } from './ActiveLink';
 
 export const Sidebar = () => {
   return (
-    <div className='z-20'>
+    <div className="z-20">
       <nav className="hidden md:block max-w-[284px] w-full bg-background">
         <ul className="flex flex-col items-start gap-5 text-lg">
           <li className="ml-2">
@@ -10,11 +10,11 @@ export const Sidebar = () => {
               <span className="ml-2">Desafios</span>
             </ActiveLink>
           </li>
-          <li>
+          {/*   <li>
             <ActiveLink to="/ranking" icon="fa-solid fa-ranking-star">
               <span className="">Ranking</span>
             </ActiveLink>
-          </li>
+          </li> */}
         </ul>
       </nav>
 

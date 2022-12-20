@@ -4,6 +4,9 @@ type ProblemProps = {
   nextProblem(): void;
   next: number;
   handleCompleteProblem(): void;
+  challengesId: string[];
+  handleSaveChallengeId(id: string): void;
+  resetNext(): void;
   completed: boolean;
 };
 
@@ -16,9 +19,18 @@ const ProblemContext = createContext<ProblemProps | undefined>(undefined);
 export const ProblemProvider = ({ children }: ProblemProviderProps) => {
   const [next, setNext] = useState(0);
   const [completed, setCompleted] = useState(false);
+  const [challengesId, setChallengesId] = useState<string[]>([]);
 
   const nextProblem = () => {
     setNext((value) => value + 1);
+  };
+
+  const resetNext = () => {
+    setNext(0);
+  };
+
+  const handleSaveChallengeId = (id: string) => {
+    setChallengesId([...challengesId, id]);
   };
 
   const handleCompleteProblem = () => {
@@ -27,7 +39,15 @@ export const ProblemProvider = ({ children }: ProblemProviderProps) => {
 
   return (
     <ProblemContext.Provider
-      value={{ next, nextProblem, completed, handleCompleteProblem }}
+      value={{
+        next,
+        nextProblem,
+        completed,
+        resetNext,
+        handleCompleteProblem,
+        handleSaveChallengeId,
+        challengesId,
+      }}
     >
       {children}
     </ProblemContext.Provider>

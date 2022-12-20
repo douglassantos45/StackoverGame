@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
 import {
   createContext,
   ReactNode,
@@ -7,22 +6,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { ProblemProps } from '../layouts/Challenge/Problem';
-import { firebaseDB } from '../services/firebaseConfig';
-
-type ChallengeProps = {
-  problems: string;
-};
-
-type UserChallengeProps = {
-  id: string;
-  challenge_id: string;
-  user_id: string;
-  completed: boolean;
-  locked: boolean;
-  name: string;
-  xp: number;
-};
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type ChallengeContextData = {};
