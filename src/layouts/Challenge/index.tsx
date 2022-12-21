@@ -36,9 +36,10 @@ export const Challenge = () => {
     if (words.length <= 0) return toast('Escolha as opções');
 
     let success = false;
+    console.log(correctWords, words);
 
-    for (let i = 0; i < words.length; i++) {
-      correctWords[i].trim() === words[i].trim()
+    for (let i = 0; i < correctWords.length; i++) {
+      correctWords[i].trim() === words[i]?.trim()
         ? (success = true)
         : (success = false);
     }
@@ -57,7 +58,6 @@ export const Challenge = () => {
       handleSaveChallengeId(
         window.location.pathname.replace('/challenge/', '')
       );
-      resetNext();
 
       toast('Finalizou', {
         style: {

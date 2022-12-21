@@ -18,7 +18,7 @@ export const problems = [
         id: 2,
         problem: 'if(5 ?? 6){console.log(true)}',
         description: 'Qual a opção para entrar na condicional do IF?',
-        correctWords: '>',
+        correctWords: '<, <=',
         randomWords: '=, <, if, >, i++, <=, forEach',
         xp: 26,
         level: 'easy',

@@ -4,11 +4,13 @@ import { ChallengeCard } from '../components/ChallengeCard';
 import { useProblemContext } from '../contexts/problemContext';
 
 export const Challenges = () => {
-  const { completed, challengesId } = useProblemContext();
+  const { completed, challengesId, resetNext } = useProblemContext();
 
   const challenges = JSON.parse(
     localStorage.getItem('react.challenges') as any
   );
+
+  resetNext();
 
   return (
     <section className="bg-background w-full">
