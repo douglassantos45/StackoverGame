@@ -35,9 +35,9 @@ export const Header = () => {
             className="bg-gray-800 w-[130px] mt-2 rounded-md text-left cursor-pointer py-4 flex flex-col gap-2 transition-all durat
 n-300 mr-1"
           >
-            <UIDropdownMenu.Item className="text-gray-300 hover:text-gray-400 outline-0 transition py-1 pl-3">
+            {/*             <UIDropdownMenu.Item className="text-gray-300 hover:text-gray-400 outline-0 transition py-1 pl-3">
               <i className="fa-solid fa-gear mr-2 text-gray-400"></i>Conta
-            </UIDropdownMenu.Item>
+            </UIDropdownMenu.Item> */}
             <UIDropdownMenu.Item className="text-gray-300 hover:text-gray-400 outline-0 transition py-1 pl-3">
               <button
                 onClick={() => {

@@ -10,13 +10,8 @@ import { Toaster, toast } from 'react-hot-toast';
 
 export const Challenge = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const {
-    next,
-    nextProblem,
-    handleCompleteProblem,
-    resetNext,
-    handleSaveChallengeId,
-  } = useProblemContext();
+  const { next, nextProblem, handleCompleteProblem, handleSaveChallengeId } =
+    useProblemContext();
   const { open, isOpen } = useModalContext();
   const barRef = useRef<HTMLDivElement>(null!);
 
