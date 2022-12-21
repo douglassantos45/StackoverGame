@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { useChallengeContext } from '../../contexts/challengeContext';
+import { useRef, useState } from 'react';
 import { useModalContext } from '../../contexts/modalContext';
 import { useProblemContext } from '../../contexts/problemContext';
 import { HeaderBar } from './HeaderBar';
@@ -14,6 +13,7 @@ export const Challenge = () => {
     useProblemContext();
   const { open, isOpen } = useModalContext();
   const barRef = useRef<HTMLDivElement>(null!);
+  const [hits, setHits] = useState(0);
 
   const json = JSON.parse(localStorage.getItem('react.challenges') as any);
 
@@ -31,7 +31,6 @@ export const Challenge = () => {
     if (words.length <= 0) return toast('Escolha as opções');
 
     let success = false;
-    console.log(correctWords, words);
 
     for (let i = 0; i < correctWords.length; i++) {
       correctWords[i].trim() === words[i]?.trim()
@@ -41,6 +40,7 @@ export const Challenge = () => {
 
     if (success) {
       toast.success('Você acertou');
+      setHits(hits + 1);
     } else {
       toast.error('Você errou');
     }
@@ -49,11 +49,12 @@ export const Challenge = () => {
       nextProblem();
       open();
     } else {
-      handleCompleteProblem();
-      handleSaveChallengeId(
-        window.location.pathname.replace('/challenge/', '')
-      );
-
+      if (hits + 1 === data.problems.length) {
+        handleCompleteProblem();
+        handleSaveChallengeId(
+          window.location.pathname.replace('/challenge/', '')
+        );
+      }
       toast('Finalizou', {
         style: {
           background: 'green',
