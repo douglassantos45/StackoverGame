@@ -12,7 +12,7 @@ type ModalProviderProps = {
 const ModalContext = createContext<ModalProps | undefined>(undefined);
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const open = () => {
     setIsOpen(!isOpen);

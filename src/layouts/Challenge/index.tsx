@@ -84,7 +84,7 @@ export const Challenge = () => {
 
       <main className="relative mt-24 h-full">
         <div className="cursor-pointer" onClick={open}>
-          <img src="bell-icon.svg" className="absolute right-0 top-8 w-8" />
+          <img src="/bell-icon.svg" className="absolute right-0 top-8 w-8" />
         </div>
         <Problem problem={data.problems[next]} />
       </main>

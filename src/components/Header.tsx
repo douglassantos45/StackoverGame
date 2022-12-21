@@ -27,6 +27,7 @@ export const Header = () => {
               src={user.photoURL}
               alt=""
               className="max-w-[40px] rounded-full"
+              referrerPolicy="no-referrer"
             />
           </UIDropdownMenu.Trigger>
 
