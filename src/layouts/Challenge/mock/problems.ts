@@ -10,7 +10,7 @@ export const problems = [
         description:
           "Crie uma variavel chamada 'carro' que recebe a string 'Gol'",
         correctWords: 'let',
-        randomWords: 'let, const, for, while, if, break, i++, const, forEach',
+        randomWords: 'let, for, while, if, break, i++, const, forEach',
         xp: 16,
         level: 'easy',
       },
