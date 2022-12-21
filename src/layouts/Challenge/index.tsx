@@ -6,6 +6,7 @@ import { HeaderBar } from './HeaderBar';
 import { Modal } from './Model';
 import { Problem } from './Problem';
 import { VerifyButton } from './VerifyButton';
+import { Toaster, toast } from 'react-hot-toast';
 
 export const Challenge = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -13,7 +14,6 @@ export const Challenge = () => {
     next,
     nextProblem,
     handleCompleteProblem,
-    challengesId,
     resetNext,
     handleSaveChallengeId,
   } = useProblemContext();
@@ -33,7 +33,7 @@ export const Challenge = () => {
       localStorage.getItem('react.words') as any
     ) as string[];
 
-    if (words.length <= 0) return alert('Escolha as opções');
+    if (words.length <= 0) return toast('Escolha as opções');
 
     let success = false;
 
@@ -44,9 +44,9 @@ export const Challenge = () => {
     }
 
     if (success) {
-      alert('Você acertou');
+      toast.success('Você acertou');
     } else {
-      alert('Você errou');
+      toast.error('Você errou');
     }
 
     if (next < data.problems.length - 1) {
@@ -59,7 +59,12 @@ export const Challenge = () => {
       );
       resetNext();
 
-      alert('finalizou');
+      toast('Finalizou', {
+        style: {
+          background: 'green',
+          color: 'white',
+        },
+      });
     }
     incrementBar();
   };
@@ -94,6 +99,8 @@ export const Challenge = () => {
       </footer>
 
       {isOpen && <Modal description={data.problems[next].description} />}
+
+      <Toaster />
     </div>
   );
 };
