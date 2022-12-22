@@ -42,7 +42,7 @@ export const Login = () => {
               token,
             })
           );
-          window.location.href = 'http://localhost:5173/home';
+          window.location.href = 'https://stackovergame.vercel.app/home';
         }
       })
       .catch((error) => {
