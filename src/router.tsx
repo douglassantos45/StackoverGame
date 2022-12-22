@@ -14,9 +14,8 @@ export const Router = () => {
         <Route
           path="/home"
           element={
-            <PrivateRouter>
               <Home />
-            </PrivateRouter>
+            
           }
         />
         <Route
