@@ -1,6 +1,7 @@
 import * as UIDropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useEffect, useState } from 'react';
 import { UserProps } from '../layouts/Home';
+import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const [user, setUser] = useState({} as UserProps);
@@ -11,6 +12,8 @@ export const Header = () => {
     ) as UserProps;
     setUser(user);
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <header className="py-4 mb-16 w-full h-20 bg-background px-4 fixed inset-0 z-50">
@@ -42,7 +45,7 @@ n-300 mr-1"
               <button
                 onClick={() => {
                   localStorage.removeItem('react.auth.user');
-                  window.location.href = '/home';
+                  navigate('/');
                 }}
               >
                 <i className="fa-solid fa-arrow-right-from-bracket mr-2 text-gray-400"></i>
