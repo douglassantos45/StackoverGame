@@ -12,7 +12,7 @@ export const Router = () => {
       <Routes>
         <Route path="/" element={<App />} />
         <Route
-          path="home"
+          path="/home"
           element={
             <PrivateRouter>
               <Home />
@@ -20,7 +20,7 @@ export const Router = () => {
           }
         />
         <Route
-          path="challenge/:id"
+          path="/challenge/:id"
           element={
             <PrivateRouter>
               <Challenge />
